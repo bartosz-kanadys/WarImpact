@@ -5,6 +5,7 @@ var Oil = require('../database/models/OilModel')
 
 var url = 'https://www.alphavantage.co/query?function=BRENT&interval=monthly&apikey=demo'
 
+
 router.get('/getFromAPI', function (req, res, next) {
   fetch(url)
     .then(res => res.json())
