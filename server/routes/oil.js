@@ -6,7 +6,7 @@ var Oil = require('../database/models/OilModel')
 
 var url = 'https://www.alphavantage.co/query?function=BRENT&interval=monthly&apikey=demo'
 
-router.get('/getOil', function (req, res, next) {
+router.get('/getOilFromAPI', function (req, res, next) {
   fetch(url)
     .then(res => res.json())
     .then(json => {
@@ -25,6 +25,19 @@ router.get('/getOil', function (req, res, next) {
     })
 
 });
+
+router.get('/getAllOils', function(req, res) {
+  Oil.findAll({
+    where: {},
+    attributes: ['date', 'price'],
+  })
+    .then(data => res.json(data))
+    .catch(err => {
+      console.error('Błąd w trakcie pobierania olejów:', err);
+      res.status(500).json({ error: 'Wystąpił błąd podczas pobierania olejów.' });
+    });
+});
+
 
 router.delete("/deleteAll", function(req,res){
   Oil.destroy({
