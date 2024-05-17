@@ -3,6 +3,8 @@ var router = express.Router();
 
 var Oil = require('../database/models/OilModel')
 
+var auth = require('../controllers/authController')
+
 var url = 'https://www.alphavantage.co/query?function=BRENT&interval=monthly&apikey=demo'
 
 
@@ -52,7 +54,7 @@ router.get('/getAll', async(req, res) => {
     });
 });
 
-router.delete("/deleteAll", async(req,res) => {
+router.delete("/deleteAll", auth.authenticate, auth.checkRole(['admin', 'root']), async(req,res) => {
   await Oil.destroy({
     where: {},
     truncate: true
