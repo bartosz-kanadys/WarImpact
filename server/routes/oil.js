@@ -27,6 +27,7 @@ router.get('/getPrice/:year/:month/', function(req, res) {
   console.log(date)
   Oil.findOne({
     where:{date: date},
+    attributes: ['date', 'price']
   }) 
   .then(data => res.json(data))
   .catch(err => {
@@ -40,6 +41,7 @@ router.get('/getPrice/:year/:month/:day', function(req, res) {
   console.log(date)
   Oil.findOne({
     where:{date: date},
+    attributes: ['date', 'price']
   }) 
   .then(data => res.json(data))
   .catch(err => {
