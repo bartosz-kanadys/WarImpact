@@ -22,23 +22,13 @@ router.get('/getFromAPI', function (req, res, next) {
     })
 });
 
-router.get('/getPrice/:year/:month/', function(req, res) {
-  var date = req.params.year+"-"+req.params.month+"-01"
-  console.log(date)
-  Oil.findOne({
-    where:{date: date},
-    attributes: ['date', 'price']
-  }) 
-  .then(data => res.json(data))
-  .catch(err => {
-    console.error('Błąd w trakcie pobierania danych:', err);
-    res.status(500).json({ error: 'Wystąpił błąd podczas pobierania danych.' });
-  });
-})
-
-router.get('/getPrice/:year/:month/:day', function(req, res) {
-  var date = req.params.year+"-"+req.params.month+"-"+req.params.day
-  console.log(date)
+router.get('/getPrice', function(req, res) {
+  if (req.query.day != null) {
+    var date = req.query.year+"-"+req.query.month+"-"+req.query.day
+  } else{
+    var date = req.query.year+"-"+req.query.month+"-01"
+  }
+  
   Oil.findOne({
     where:{date: date},
     attributes: ['date', 'price']

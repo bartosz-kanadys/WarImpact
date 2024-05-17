@@ -25,9 +25,7 @@ async function syncDatabase() {
 }
 
 async function run() {
-
   await syncDatabase();// remember to comment this after server runs ones.
-
 }
 //run()
 
