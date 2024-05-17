@@ -6,8 +6,8 @@ var Oil = require('../database/models/OilModel')
 var url = 'https://www.alphavantage.co/query?function=BRENT&interval=monthly&apikey=demo'
 
 
-router.get('/getFromAPI', function (req, res, next) {
-  fetch(url)
+router.get('/getFromAPI', async (req, res, next) => {
+  await fetch(url)
     .then(res => res.json())
     .then(json => {
       json.data.forEach(element => {
@@ -22,14 +22,14 @@ router.get('/getFromAPI', function (req, res, next) {
     })
 });
 
-router.get('/getPrice', function(req, res) {
+router.get('/getPrice', async (req, res) => {
   if (req.query.day != null) {
     var date = req.query.year+"-"+req.query.month+"-"+req.query.day
   } else{
     var date = req.query.year+"-"+req.query.month+"-01"
   }
   
-  Oil.findOne({
+  await Oil.findOne({
     where:{date: date},
     attributes: ['date', 'price']
   }) 
@@ -40,8 +40,8 @@ router.get('/getPrice', function(req, res) {
   });
 })
 
-router.get('/getAll', function(req, res) {
-  Oil.findAll({
+router.get('/getAll', async(req, res) => {
+  await Oil.findAll({
     where: {},
     attributes: ['date', 'price'],
   })
@@ -52,8 +52,8 @@ router.get('/getAll', function(req, res) {
     });
 });
 
-router.delete("/deleteAll", function(req,res){
-  Oil.destroy({
+router.delete("/deleteAll", async(req,res) => {
+  await Oil.destroy({
     where: {},
     truncate: true
   })
