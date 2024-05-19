@@ -50,7 +50,7 @@ module.exports = {
                 for (const element of json.data) {
                     await model.upsert({
                         date: new Date(element.date),
-                        price: element.value,
+                        price: parseFloat(element.value).toFixed(2),
                     }, { transaction });
                 }
                 await transaction.commit();
