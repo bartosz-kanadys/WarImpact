@@ -1,6 +1,5 @@
 const { Model } = require('sequelize')
-var User = require('../database/models/UserModel')
-var roles = require('../roles')
+const sequelize = require('../database/sequelize');
 
 module.exports = {
     async getAll(req, res, model) {
@@ -42,19 +41,26 @@ module.exports = {
     },
 
     async getFromAPI(req, res, model, url) {
-        await fetch(url)
-        .then(res => res.json())
-        .then(json => {
-          json.data.forEach(element => {
-            model.create(
-              {
-                date: new Date(element.date),
-                price: element.value,
-              }
-            );
-          });
-          res.send("Do bazy danych dodano historie cen baryłki ropy od roku 1987")
-        })
-    }
+        try {
+            const response = await fetch(url);
+            const json = await response.json();
 
+            const transaction = await sequelize.transaction();
+            try {
+                for (const element of json.data) {
+                    await model.upsert({
+                        date: new Date(element.date),
+                        price: element.value,
+                    }, { transaction });
+                }
+                await transaction.commit();
+                res.send('Transaction committed successfully. \n Do bazy danych dodano historie cen surowca');
+            } catch (error) {
+                await transaction.rollback();
+                res.status(500).send('Transaction rolled back due to an error: ' + error.message);
+            }
+        } catch (err) {
+            res.status(500).send('Błąd w trakcie pobierania danych: ' + err.message);
+        }
+    }
 }
