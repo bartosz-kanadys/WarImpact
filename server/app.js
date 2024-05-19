@@ -10,7 +10,7 @@ var indexRouter = require('./routes/index');
 var oilRouter = require('./routes/resourcesRoute');
 
 var app = express();
-app.use(cors);
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/res', oilRouter);
-
+app.use(cors);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
