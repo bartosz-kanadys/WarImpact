@@ -25,4 +25,6 @@ router.delete("/:typ/deleteAll",
   }
 )
 
+router.get('/loadAll',  resource.loadAll)
+
 module.exports = router;

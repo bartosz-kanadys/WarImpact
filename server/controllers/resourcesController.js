@@ -1,5 +1,6 @@
 const { Model } = require('sequelize')
 const sequelize = require('../database/sequelize');
+var request = require('request');
 
 module.exports = {
     async getAll(req, res, model) {
@@ -61,6 +62,26 @@ module.exports = {
             }
         } catch (err) {
             res.status(500).send('Błąd w trakcie pobierania danych: ' + err.message);
+        }
+    },
+
+    async loadAll(req, res, next) {
+        let host = "http://localhost:5000/res"
+        console.log(host)
+        try {
+            await fetch(host + '/oil/getFromAPI').then(res => {}),
+            await fetch(host + '/copper/getFromAPI').then(res => {}),
+            await fetch(host + '/aluminium/getFromAPI').then(res => {}),
+            await fetch(host + '/coffee/getFromAPI').then(res => {}),
+            await fetch(host + '/corn/getFromAPI').then(res => {}),
+            await fetch(host + '/cotton/getFromAPI').then(res => {}),
+            await fetch(host + '/gas/getFromAPI').then(res => {}),
+            await fetch(host + '/sugar/getFromAPI').then(res => {}),
+            await fetch(host + '/wheat/getFromAPI').then(res => {}),
+
+            res.status(200).send('sukces')
+        } catch (error) {
+            res.send('error')
         }
     }
 }
