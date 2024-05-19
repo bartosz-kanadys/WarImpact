@@ -114,7 +114,7 @@ module.exports = {
                             role: loggingUser?.role
                         },
                         process.env.TOKEN_SECRET,
-                        { expiresIn: 600 }
+                        { expiresIn: 6000 }
                     )
 
                     res.status(200).json({
