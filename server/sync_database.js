@@ -9,6 +9,7 @@ const Corn = require('./database/models/CornModel')
 const Cotton = require('./database/models/CottonModel')
 const Sugar = require('./database/models/SugarModel')
 const Wheat = require('./database/models/WheatModel')
+const User = require('./database/models/UserModel')
 
 async function syncDatabase() {
     await sequelize.sync();
