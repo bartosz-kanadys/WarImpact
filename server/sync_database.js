@@ -16,3 +16,5 @@ async function syncDatabase() {
 }
 syncDatabase()
 
+//run: node sync_database.js
+
