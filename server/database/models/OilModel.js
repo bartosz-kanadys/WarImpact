@@ -17,18 +17,4 @@ const Oil = sequelize.define('Oil', {
   }
 );
 
-// Synchronize the model with the database
-// This function will delete all existing tables in the database
-async function syncDatabase() {
-  await sequelize.sync();
-  console.log('Database synchronized.');
-}
-
-async function run() {
-  await syncDatabase();// remember to comment this after server runs ones.
-}
-//run()
-
-
-
 module.exports = Oil;
