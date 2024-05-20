@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+
 /**
  * Module dependencies.
  */
@@ -7,12 +8,14 @@
 var app = require('../app');
 var debug = require('debug')('server:server');
 var http = require('http');
+var dotenv = require('dotenv')
+dotenv.config()
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = 5000
+var port = process.env.PORT
 
 /**
  * Create HTTP server.

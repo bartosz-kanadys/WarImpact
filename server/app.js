@@ -7,6 +7,7 @@ var cors = require('cors');
 
 var indexRouter = require('./routes/index');
 var oilRouter = require('./routes/resourcesRoute');
+var conflictRouter = require('./routes/conflictsRoute');
 
 var app = express();
 
@@ -18,6 +19,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/res', oilRouter);
+app.use('/conflicts', conflictRouter);
 app.use(cors);
 
 // catch 404 and forward to error handler
