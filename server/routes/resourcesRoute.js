@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var auth = require('../controllers/authController')
+var auth = require('../controllers/authorizationController')
 var resource = require('../controllers/resourcesController')
 var convert = require('../controllers/convertController')
 

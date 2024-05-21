@@ -1,40 +1,14 @@
 const bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken')
-var cookieParser = require('cookie-parser');
 
 var dotenv = require('dotenv')
 dotenv.config()
 
 var User = require('../database/models/UserModel')
-var roles = require('../roles');
 const sequelize = require('../database/sequelize');
 const { Transaction } = require('sequelize');
 
-
 module.exports = {
-    async authenticate(req, res, next) {
-        const authHeader = req.headers
-        const token = authHeader['authorization']
-        if (token == null || token == '') return res.status(401).json({ message: 'Unauthorized' })
-
-        jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
-            if (err) return res.status(403).json({ message: 'Token is not valid' })
-            req.user = user
-            next()
-        })
-    },
-
-    checkRole(roles) {
-        return (req, res, next) => {
-            const userRole = req.user.role
-            if (roles.includes(userRole)) {
-                next()
-            } else {
-                return res.status(403).json({ message: 'Unauthorized access' });
-            }
-        }
-    },
-
     async register(req, res, next) {
         try {
             await sequelize.transaction(
@@ -167,5 +141,3 @@ module.exports = {
 
     }
 }
-
-

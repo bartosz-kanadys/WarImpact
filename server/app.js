@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
 
-var indexRouter = require('./routes/index');
+var indexRouter = require('./routes/authenticationRoute');
 var oilRouter = require('./routes/resourcesRoute');
 var conflictRouter = require('./routes/conflictsRoute');
 
