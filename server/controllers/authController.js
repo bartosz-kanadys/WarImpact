@@ -6,7 +6,8 @@ var dotenv = require('dotenv')
 dotenv.config()
 
 var User = require('../database/models/UserModel')
-var roles = require('../roles')
+var roles = require('../roles');
+const sequelize = require('../database/sequelize');
 
 
 module.exports = {
@@ -35,48 +36,49 @@ module.exports = {
 
     async register(req, res, next) {
         try {
-            const user = req.body
-            const { login, email, password, role } = user
+            await sequelize.transaction(async () => {
+                const user = req.body
+                const { login, email, password, role } = user
 
-            const isEmailExist = await User.findOne({ where: { email: email } })
-            const isLoginExist = await User.findOne({ where: { login: login } })
+                const isEmailExist = await User.findOne({ where: { email: email } })
+                const isLoginExist = await User.findOne({ where: { login: login } })
 
-            if (isEmailExist) {
-                res.status(400).json({
-                    status: 400,
-                    message: "Email istnieje już w bazie",
+                if (isEmailExist) {
+                    res.status(400).json({
+                        status: 400,
+                        message: "Email istnieje już w bazie",
+                    });
+                    return;
+                }
+
+                if (isLoginExist) {
+                    res.status(400).json({
+                        status: 400,
+                        message: "Login istnieje już w bazie",
+                    });
+                    return;
+                }
+
+                const saltRounds = 10;
+
+                bcrypt.genSalt(saltRounds, function (err, salt) {
+                    bcrypt.hash(password, salt, function (err, hash) {
+                        if (err) throw err;
+                        User.create({
+                            login: login,
+                            email: email,
+                            password: hash,
+                            role: role
+                        })
+                    });
                 });
-                return;
-            }
 
-            if (isLoginExist) {
-                res.status(400).json({
-                    status: 400,
-                    message: "Login istnieje już w bazie",
+                res.status(200).json({
+                    status: 201,
+                    success: true,
+                    message: "Zarejestrowano użytkownika"
                 });
-                return;
-            }
-
-            const saltRounds = 10;
-
-            bcrypt.genSalt(saltRounds, function (err, salt) {
-                bcrypt.hash(password, salt, function (err, hash) {
-                    if (err) throw err;
-                    User.create({
-                        login: login,
-                        email: email,
-                        password: hash,
-                        role: role
-                    })
-                });
-            });
-
-            res.status(200).json({
-                status: 201,
-                success: true,
-                message: "Zarejestrowano użytkownika"
-            });
-
+            })
         } catch (error) {
             res.status(400).json({
                 status: 400,
@@ -135,7 +137,7 @@ module.exports = {
                         secure: false,
                         httpOnly: true
                     })
-                    
+
                     res.status(200).json({
                         status: 200,
                         success: true,
