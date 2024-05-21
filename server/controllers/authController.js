@@ -1,5 +1,7 @@
 const bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken')
+var cookieParser = require('cookie-parser');
+
 var dotenv = require('dotenv')
 dotenv.config()
 
@@ -114,14 +116,32 @@ module.exports = {
                             role: loggingUser?.role
                         },
                         process.env.TOKEN_SECRET,
-                        { expiresIn: 6000 }
+                        { expiresIn: '1h' }
                     )
 
+                    const refreshToken = jwt.sign(
+                        {
+                            //id: loggingUser?.id,
+                            login: loggingUser?.login,
+                            email: loggingUser?.email,
+                            role: loggingUser?.role
+                        },
+                        process.env.TOKEN_SECRET,
+                        { expiresIn: '1h' }
+                    )
+
+                    res.cookie('JWT', accesToken, {
+                        maxAge: 600,
+                        secure: false,
+                        httpOnly: true
+                    })
+                    
                     res.status(200).json({
                         status: 200,
                         success: true,
                         message: "login success",
-                        token: accesToken,
+                        accesToken: accesToken,
+                        refreshToken: refreshToken
                     });
                 } else {
                     res.status(404).json({
