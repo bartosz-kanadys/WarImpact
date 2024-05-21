@@ -9,5 +9,4 @@ router.get('/getConflictByDate', conflictsController.getConflictByDate)
 
 router.get('/loadAll', conflictsController.loadAll)
 
-
 module.exports = router;

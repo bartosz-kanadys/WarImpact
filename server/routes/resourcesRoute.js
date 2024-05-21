@@ -5,7 +5,7 @@ var auth = require('../controllers/authorizationController')
 var resource = require('../controllers/resourcesController')
 var convert = require('../controllers/convertController')
 
-router.get('/:typ/getFromAPI', (req, res, next) =>{
+router.get('/:typ/getFromAPI', (req, res, next) => {
   convert.stringToModel(req, res, next).then(resource.getFromAPI(req, res, req.model, req.url))
 })
 
@@ -25,6 +25,6 @@ router.delete("/:typ/deleteAll",
   }
 )
 
-router.get('/loadAll',  resource.loadAll)
+router.get('/loadAll', resource.loadAll)
 
 module.exports = router;

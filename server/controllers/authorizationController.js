@@ -1,4 +1,3 @@
-const bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken')
 var dotenv = require('dotenv')
 dotenv.config()

@@ -14,7 +14,7 @@ const urlGas = 'https://www.alphavantage.co/query?function=NATURAL_GAS&interval=
 const urlAluminium = 'https://www.alphavantage.co/query?function=ALUMINUM&interval=monthly&apikey=demo'
 const urlWheat = 'https://www.alphavantage.co/query?function=WHEAT&interval=monthly&apikey=demo'
 const urlCorn = 'https://www.alphavantage.co/query?function=CORN&interval=monthly&apikey=demo'
-const urlCotton= 'https://www.alphavantage.co/query?function=COTTON&interval=monthly&apikey=demo'
+const urlCotton = 'https://www.alphavantage.co/query?function=COTTON&interval=monthly&apikey=demo'
 const urlSugar = 'https://www.alphavantage.co/query?function=SUGAR&interval=monthly&apikey=demo'
 const urlCoffee = 'https://www.alphavantage.co/query?function=COFFEE&interval=monthly&apikey=demo'
 
@@ -62,7 +62,5 @@ module.exports = {
                 res.send("Błędna nazwa surowca")
                 break;
         }
-        
-        
     }
 }

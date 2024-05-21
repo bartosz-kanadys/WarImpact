@@ -1,6 +1,6 @@
 const sequelize = require('../sequelize');
 const { DataTypes } = require('sequelize');
-// Define a model
+
 const Copper = sequelize.define('Copper', {
   date: {
     type: DataTypes.DATEONLY,
