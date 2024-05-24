@@ -7,7 +7,7 @@ export const DataFetcher = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    axios.get('https://api.acleddata.com/acled/read?limit=10&event_date=1980-01-01&event_date_to=2024-12-31') // Zmień URL na właściwy adres API
+    axios.get('http://localhost:5000/res/copper/getAll') // Zmień URL na właściwy adres API
       .then(response => {
         setData(response.data);
         setLoading(false);
