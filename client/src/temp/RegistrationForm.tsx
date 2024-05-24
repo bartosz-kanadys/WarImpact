@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export const RegistrationForm = () => {
   const [login, setLogin] = useState('');
