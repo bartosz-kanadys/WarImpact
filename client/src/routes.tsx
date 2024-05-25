@@ -1,9 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Layout } from "./Layout";
-import { LoginFormPage } from './Pages/LoginFormPage'
-import { DataFetcherPage } from './Pages/DataFetcherPage'
-import { HomePage } from './Pages/HomePage'
-import { RegistrationFormPage } from './Pages/RegistrationFormPage'
+import { Layout } from "./components/Layout";
+import { LoginFormPage } from './components/Pages/LoginFormPage'
+import { DataFetcherPage } from './components/Pages/DataFetcherPage'
+import { HomePage } from './components/Pages/HomePage'
+import { RegistrationFormPage } from './components/Pages/RegistrationFormPage'
 
 export const routes = {
   HOME: {
@@ -11,13 +11,13 @@ export const routes = {
     // title:
   },
   DATAFETCHER: {
-    path: "/counter",
+    path: "/datafetcher",
   },
   REGISTRATIONFORM: {
-    path: "/generator",
+    path: "/registrationform",
   },
   LOGINFORM: {
-    path: "/registration",
+    path: "/loginform",
   },
 };
 

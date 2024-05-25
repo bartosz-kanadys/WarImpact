@@ -1,4 +1,4 @@
-import { RegistrationForm } from '../RegistrationForm'
+import { RegistrationForm } from '../../temp/RegistrationForm'
 export const RegistrationFormPage = () => {
     return <RegistrationForm />;
   };
