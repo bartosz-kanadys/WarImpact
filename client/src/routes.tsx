@@ -1,9 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Layout } from "./Layout";
-import { LoginFormPage } from './components/Pages/LoginFormPage'
-import { DataFetcherPage } from './components/Pages/DataFetcherPage'
-import { HomePage } from './components/Pages/HomePage'
-import { RegistrationFormPage } from './components/Pages/RegistrationFormPage'
+import { LoginFormPage, DataFetcherPage, HomePage,RegistrationFormPage } from './components/Pages'
 
 export const routes = {
   HOME: {
