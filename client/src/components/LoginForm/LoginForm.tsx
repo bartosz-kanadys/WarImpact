@@ -2,16 +2,33 @@ import { Input } from "../../ui/Input"
 import { useForm, type SubmitHandler } from "react-hook-form"
 import { LoginFormData,validationSchema } from "./types";
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useState } from 'react';
 
 export const LoginForm = () => {
     const inputClass = "bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
     const labelClass = "block mb-2 text-sm font-medium text-gray-900 dark:text-white"
 
     const { register, handleSubmit, formState: {errors}} = useForm<LoginFormData>({ resolver: zodResolver(validationSchema)});
+    const [message, setMessage] = useState('');
 
-    const handleLoginForm: SubmitHandler<LoginFormData> = (data) => {
-        console.log(data);
-    }
+    const handleLoginForm: SubmitHandler<LoginFormData> = async (data) => {
+        const response = await fetch('http://localhost:5000/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      const responseData = await response.json();
+      if (response.ok) {
+        const token = responseData.accesToken;
+        localStorage.setItem('jwtToken', token);
+        setMessage(`Success: ${responseData.message}`);
+      } else {
+        setMessage(`Error: ${responseData.message}`);
+      }
+        };
 
     return (
     <section className="bg-gray-50 dark:bg-gray-900">
@@ -52,6 +69,7 @@ export const LoginForm = () => {
                             Don’t have an account yet? <a href="#" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
                         </p>
                     </form>
+                    {message && <p>{message}</p>}
                 </div>
             </div>
         </div>

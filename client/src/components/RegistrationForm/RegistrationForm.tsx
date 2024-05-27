@@ -11,7 +11,7 @@ export const RegistrationForm = () => {
     const { register, handleSubmit, formState: {errors}} = useForm<LoginFormData>({ resolver: zodResolver(validationSchema)});
     const [message, setMessage] = useState('');
 
-    const handleLoginForm: SubmitHandler<LoginFormData> = async (data) => {
+    const handleRegistrationForm: SubmitHandler<LoginFormData> = async (data) => {
         console.log(JSON.stringify(data));
         const response = await fetch('http://localhost:5000/register', {
             method: 'POST',
@@ -40,7 +40,7 @@ export const RegistrationForm = () => {
                     <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                         Sign in to your account
                     </h1>
-                    <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit(handleLoginForm)}>
+                    <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit(handleRegistrationForm)}>
                     <div>
                             <Input
                                 label="Your email"
