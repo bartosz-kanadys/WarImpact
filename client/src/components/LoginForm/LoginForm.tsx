@@ -10,7 +10,7 @@ import { useAuthContext } from "../Auth/AuthContext";
 export const LoginForm = () => {
     const inputClass = "bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
     const labelClass = "block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-    const { logIn } = useAuthContext();
+    const { isLoggedIn,logIn } = useAuthContext();
     const { register, handleSubmit, formState: {errors}} = useForm<LoginFormData>({ resolver: zodResolver(validationSchema)});
     const [message, setMessage] = useState('');
 
@@ -25,10 +25,10 @@ export const LoginForm = () => {
 
       const responseData = await response.json();
       if (response.ok) {
+        logIn()
         const token = responseData.accesToken;
         localStorage.setItem('jwtToken', token);
         setMessage(`Success: ${responseData.message}`);
-        logIn
       } else {
         setMessage(`Error: ${responseData.message}`);
       }
@@ -40,6 +40,7 @@ export const LoginForm = () => {
             <a href="#" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
                 <img className="w-16 h-16 mr-2" src="https://emojigraph.org/media/facebook/beaver_1f9ab.png" alt="logo" />
                 Bober
+                {isLoggedIn}
             </a>
             <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                 <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -78,6 +79,7 @@ export const LoginForm = () => {
                         </p>
                     </form>
                     {message && <p>{message}</p>}
+                    
                 </div>
             </div>
         </div>

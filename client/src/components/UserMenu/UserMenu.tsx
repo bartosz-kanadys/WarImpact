@@ -1,20 +1,19 @@
-import { useState } from "react";
 import { routes } from "../../routes";
 import { MenuNavLink } from "../../ui/MenuNavLink";
 import { useAuthContext } from "../Auth/AuthContext";
 
 export const UserMenu = () => {
     const { isLoggedIn, logOut } = useAuthContext();
-    const [userName, setuserName] = useState("");
+    //const [userName, setuserName] = useState("");
     const handleLogout = () => {
         localStorage.removeItem('jwtToken');  // Remove the JWT token
-        logOut
+        logOut()
     }
+
     return (
         <>
             {isLoggedIn ? (
                 <>
-                    <p>{userName}</p>
                     <button onClick={handleLogout}>Logout</button>
                 </>
             ) : (
