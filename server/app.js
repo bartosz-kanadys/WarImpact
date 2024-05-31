@@ -17,16 +17,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use(cors({
   origin: 'http://localhost:5173' // Zmień na adres swojej aplikacji frontendowej
 }));
-
 app.use('/', indexRouter);
 app.use('/res', oilRouter);
 app.use('/conflicts', conflictRouter);
 app.use('/user', userRouter)
-
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

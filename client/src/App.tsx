@@ -1,12 +1,17 @@
-import { useState } from 'react'
-import './App.css'
-
+import { RouterProvider } from "react-router-dom";
+import { router } from "./routes"
+import { AuthContextProvider } from "./components/Auth/AuthContext";
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-     <h1>działa</h1>
+     <div className="App">
+      <main>
+      <AuthContextProvider>
+        <RouterProvider router={router} />
+      </AuthContextProvider>
+      </main>
+    </div>
     </>
   )
 }
