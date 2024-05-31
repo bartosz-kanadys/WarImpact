@@ -22,12 +22,11 @@ export const LoginForm = () => {
         },
         body: JSON.stringify(data),
       });
-
       const responseData = await response.json();
       if (response.ok) {
-        logIn()
         const token = responseData.accesToken;
         localStorage.setItem('jwtToken', token);
+        logIn()
         setMessage(`Success: ${responseData.message}`);
       } else {
         setMessage(`Error: ${responseData.message}`);

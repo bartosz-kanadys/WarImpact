@@ -1,11 +1,16 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { jwtDecode } from 'jwt-decode';
 
 type AuthContextType = {
   isLoggedIn: boolean;
-  toggleValue: () => void;
+  username: string;
   logIn: () => void;
   logOut: () => void;
 };
+
+type JwtPayLoad = {
+  login:string
+}
 export const AuthContext = createContext<AuthContextType | null>(null);
 AuthContext.displayName = "AuthContext";
 
@@ -21,16 +26,26 @@ export const useAuthContext = () => {
 
 const useAuth = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const toggleValue = () => setIsLoggedIn((value) => !value);
-    const logIn = () => setIsLoggedIn(true);
+    const [username, setuserName ] = useState ("");
+    const logIn = () => {
+      const token = localStorage.getItem('jwtToken');
+      if(token != null){
+        setIsLoggedIn(true);
+        const decodedToken = jwtDecode<JwtPayLoad>(token);
+        console.log(decodedToken);
+        setuserName(decodedToken.login)
+      }
+    }
     const logOut = () => setIsLoggedIn(false);
     useEffect(() => {
         const token = localStorage.getItem('jwtToken');
-        if (token) {
-        setIsLoggedIn(true);
+        if (token != null) {
+          setIsLoggedIn(true);
+          const decodedToken = jwtDecode<JwtPayLoad>(token);
+          setuserName(decodedToken.login)
         }
     }, []);
-    return { isLoggedIn, toggleValue, logIn, logOut };
+    return { isLoggedIn, username,logIn, logOut };
 };
 
 export const AuthContextProvider = ({
@@ -38,9 +53,9 @@ export const AuthContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const { isLoggedIn, toggleValue, logIn, logOut } = useAuth();
+  const { isLoggedIn, username, logIn, logOut } = useAuth();
   return (
-    <AuthContext.Provider value={{ isLoggedIn, toggleValue, logIn, logOut }}>
+    <AuthContext.Provider value={{ isLoggedIn,username, logIn, logOut }}>
       {children}
     </AuthContext.Provider>
   );

@@ -3,8 +3,7 @@ import { MenuNavLink } from "../../ui/MenuNavLink";
 import { useAuthContext } from "../Auth/AuthContext";
 
 export const UserMenu = () => {
-    const { isLoggedIn, logOut } = useAuthContext();
-    //const [userName, setuserName] = useState("");
+    const { isLoggedIn, username, logOut } = useAuthContext();
     const handleLogout = () => {
         localStorage.removeItem('jwtToken');  // Remove the JWT token
         logOut()
@@ -14,6 +13,7 @@ export const UserMenu = () => {
         <>
             {isLoggedIn ? (
                 <>
+                    <p>{username}</p>
                     <button onClick={handleLogout}>Logout</button>
                 </>
             ) : (
