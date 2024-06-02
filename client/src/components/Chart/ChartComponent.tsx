@@ -5,7 +5,8 @@ type Price = {
   price: number,
 }
 type Conflict = {
-  start: string,
+  name:string,
+  begin: string,
   end:string,
 }
 type Props = {
@@ -29,22 +30,22 @@ export const ChartComponent = ({Prices, Conflicts} :Props) => {
         <Legend />
         <Line type="monotone" dataKey="price" stroke="#8884d8" activeDot={{ r: 8 }} />
         {Conflicts.map(period => {
-          if (period.start === period.end) {
+          if (period.begin === period.end) {
             return (
-                <ReferenceLine x={period.start} stroke="red" >
-                  <Label fill="white">conflict</Label>
+                <ReferenceLine key={period.name} x={period.begin} stroke="red" >
+                  <Label fill="white">{period.name}</Label>
                 </ReferenceLine>
             );
           } else {
             return (
               <ReferenceArea
-                key={`${period.start}-${period.end}`}
-                x1={period.start}
+                key={period.name}
+                x1={period.begin}
                 x2={period.end}
                 stroke='yellow'
-                strokeOpacity={0.3}
+                strokeOpacity={0.5}
               >
-                <Label fill="white">conflict</Label>
+                <Label fill="white">{period.name}</Label>
               </ReferenceArea>
             );
           }
