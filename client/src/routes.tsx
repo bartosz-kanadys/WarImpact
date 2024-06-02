@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Layout } from "./Layout";
-import { LoginFormPage, DataFetcherPage, HomePage,RegistrationFormPage,DownloadPage } from './components/Pages'
+import { LoginFormPage, DataFetcherPage, HomePage,RegistrationFormPage,DownloadPage,ChartPage } from './components/Pages'
 
 export const routes = {
   HOME: {
@@ -18,6 +18,9 @@ export const routes = {
   },
   DOWNLOADPAGE: {
     path: "/download",
+  },
+  CHARTPAGE: {
+    path: "/charts",
   },
 };
 
@@ -45,6 +48,10 @@ export const router = createBrowserRouter([
       {
         path: routes.DOWNLOADPAGE.path,
         element: <DownloadPage />,
+      },
+      {
+        path: routes.CHARTPAGE.path,
+        element: <ChartPage />,
       },
     ],
   },
