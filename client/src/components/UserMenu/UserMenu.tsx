@@ -13,7 +13,7 @@ export const UserMenu = () => {
         <>
             {isLoggedIn ? (
                 <>
-                    <p>{username}</p>
+                    <p className="mr-5">{username}</p>
                     <button onClick={handleLogout}>Logout</button>
                 </>
             ) : (
