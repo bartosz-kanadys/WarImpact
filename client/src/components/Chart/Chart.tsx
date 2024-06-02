@@ -1,4 +1,4 @@
-import { useState,useEffect } from 'react';
+import { useState } from 'react';
 import { ChartComponent } from "./ChartComponent"
 //import { commodityPrices, conflictPeriods } from './data';
 import { format, parseISO } from 'date-fns';
@@ -10,6 +10,11 @@ const roundDateToMonth = (dateString: string): string => {
   return format(roundedDate, 'yyyy-MM');
 };
 
+
+type Props = {
+  link:string;
+  name:string
+};
 
 
 type Price = {
@@ -23,16 +28,16 @@ type Conflict = {
   victims: number,
 }
 
-export const Chart = () => {
+export const Chart = ({link,name}:Props) => {
 
   const [prices, setPrices] = useState<Price[]>([]);
   const [conflicts, setConflicts] = useState<Conflict[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+
     const fetchData = async () => {
       try {
-        const pricesResponse = await fetch('http://localhost:5000/res/copper/getAll');
+        const pricesResponse = await fetch('http://localhost:5000'+link);
         const pricesData = await pricesResponse.json();
 
         const conflictsResponse = await fetch('http://localhost:5000/conflicts/getConflicts');
@@ -48,7 +53,7 @@ export const Chart = () => {
     };
 
     fetchData();
-  }, []);
+
 
   if (loading) {
     return <div>Loading...</div>;
@@ -69,7 +74,8 @@ export const Chart = () => {
     console.log(roundedCommodityPrices)
     console.log(roundedConflictPeriods)
     return(
-        <>
+        <> 
+            <h1>{name}</h1>
             <ChartComponent Prices={roundedCommodityPrices} Conflicts={roundedConflictPeriods}/>
         </>
     )

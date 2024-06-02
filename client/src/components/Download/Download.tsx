@@ -1,5 +1,6 @@
+import { Data } from "../../data/Data";
 import {Card} from "./Card"
-import { Data } from "./Data"
+
 
 export const Download = () => {
     return (

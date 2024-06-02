@@ -1,14 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Layout } from "./Layout";
-import { LoginFormPage, DataFetcherPage, HomePage,RegistrationFormPage,DownloadPage,ChartPage } from './components/Pages'
+import { LoginFormPage,  HomePage,RegistrationFormPage,DownloadPage,ChartPage } from './components/Pages'
 
 export const routes = {
   HOME: {
     path: "/",
     // title:
-  },
-  DATAFETCHER: {
-    path: "/datafetcher",
   },
   REGISTRATIONFORM: {
     path: "/register",
@@ -32,10 +29,6 @@ export const router = createBrowserRouter([
       {
         path: routes.HOME.path,
         element: <HomePage />,
-      },
-      {
-        path: routes.DATAFETCHER.path,
-        element: <DataFetcherPage />,
       },
       {
         path: routes.REGISTRATIONFORM.path,

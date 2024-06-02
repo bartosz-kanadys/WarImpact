@@ -1,4 +1,4 @@
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceArea,ReferenceLine, Label } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceArea,ReferenceLine, Label, Brush, ResponsiveContainer } from 'recharts';
 
 type Price = {
   date: string,
@@ -13,43 +13,66 @@ type Props = {
   Prices: Price[],
   Conflicts: Conflict[],
 } 
+
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="custom-tooltip bg-slate-600 p-2 border-2 border-black">
+        <p className="label">{`${label}-01 : ${payload[0].value}$`}</p>
+      </div>
+    );
+  }
+
+  return null;
+};
+
 export const ChartComponent = ({Prices, Conflicts} :Props) => {
     return (
+      <ResponsiveContainer width="100%" height={500}>
       <LineChart
-        width={1000}
-        height={500}
         data={Prices}
         margin={{
-          top: 20, right: 30, left: 20, bottom: 5,
+          top: 20, right: 100, left: 20, bottom: 5,
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="date" />
         <YAxis />
-        <Tooltip />
+        <Tooltip content={<CustomTooltip />} />
         <Legend />
         <Line type="monotone" dataKey="price" stroke="#8884d8" activeDot={{ r: 8 }} />
         {Conflicts.map(period => {
-          if (period.begin === period.end) {
-            return (
-                <ReferenceLine key={period.name} x={period.begin} stroke="red" >
-                  <Label fill="white">{period.name}</Label>
-                </ReferenceLine>
-            );
-          } else {
+
+          return (
+              <ReferenceLine key={`${period.name}StartLine`} x={period.begin} stroke="red" >
+                <Label fill="white" angle={-90}  offset={10}>{period.name}</Label>
+              </ReferenceLine>
+          );
+
+          })}
+          {Conflicts.map(period => {
+
+          return (
+              <ReferenceLine key={`${period.name}EndLine`} x={period.end} stroke="red" >
+                <Label fill="rgba(255, 255, 255, 0.5)" angle={-90}  offset={10}>{period.name} - koniec</Label>
+              </ReferenceLine>
+          );
+
+          })}
+          {Conflicts.map(period => {
             return (
               <ReferenceArea
                 key={period.name}
                 x1={period.begin}
                 x2={period.end}
-                stroke='yellow'
-                strokeOpacity={0.5}
+                ifOverflow='visible'
+                fill="rgba(255, 0, 0, 0.2)"
               >
-                <Label fill="white">{period.name}</Label>
               </ReferenceArea>
             );
-          }
         })}
+        <Brush dataKey="date" height={30} stroke="#8884d8" tickFormatter={(date) => new Date(date).toLocaleDateString()} />
       </LineChart>
+      </ResponsiveContainer>
     );
   };

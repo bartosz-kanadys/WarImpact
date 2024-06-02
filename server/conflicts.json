@@ -58,7 +58,7 @@
     {
         "name": "Wojna domowa w Somalii",
         "begin": "1991-01-26",
-        "end": "2024-05-19",
+        "end": "2024-04-19",
         "localization": "Somalia",
         "victims": 500000
     },
@@ -86,21 +86,21 @@
     {
         "name": "Wojna domowa w Syrii",
         "begin": "2011-03-15",
-        "end": "2024-05-19",
+        "end": "2024-04-19",
         "localization": "Syria",
         "victims": 500000
     },
     {
         "name": "Wojna domowa w Jemenie",
         "begin": "2014-09-16",
-        "end": "2024-05-19",
+        "end": "2024-04-19",
         "localization": "Jemen",
         "victims": 233000
     },
     {
         "name": "Wojna na Ukrainie",
         "begin": "2014-02-20",
-        "end": "2024-05-19",
+        "end": "2024-04-19",
         "localization": "Ukraina",
         "victims": 50000
     },
@@ -114,7 +114,7 @@
     {
         "name": "Konflikt z Boko Haram",
         "begin": "2009-07-26",
-        "end": "2024-05-19",
+        "end": "2024-04-19",
         "localization": "Nigeria, Kamerun, Niger, Czad",
         "victims": 350000
     },
@@ -128,14 +128,14 @@
     {
         "name": "Konflikt w Mali",
         "begin": "2012-01-16",
-        "end": "2024-05-19",
+        "end": "2024-04-19",
         "localization": "Mali",
         "victims": 20000
     },
     {
         "name": "Kryzys Rohingya",
         "begin": "2016-10-09",
-        "end": "2024-05-19",
+        "end": "2024-04-19",
         "localization": "Myanmar, Bangladesz",
         "victims": 24000
     },
@@ -156,7 +156,7 @@
     {
         "name": "Konflikt w Kaszmirze",
         "begin": "1989-07-31",
-        "end": "2024-05-19",
+        "end": "2024-04-19",
         "localization": "Kaszmir",
         "victims": 47000
     },
@@ -184,7 +184,7 @@
     {
         "name": "Wojna na Ukrainie",
         "begin": "2022-02-24",
-        "end": "2024-05-19",
+        "end": "2024-04-19",
         "localization": "Ukraina",
         "victims": 500000
     }
