@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors({
-  origin: 'http://localhost:5173' // Zmień na adres swojej aplikacji frontendowej
+  origin: '*' // Zmień na adres swojej aplikacji frontendowej
 }));
 app.use('/', indexRouter);
 app.use('/res', oilRouter);

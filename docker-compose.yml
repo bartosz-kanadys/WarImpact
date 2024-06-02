@@ -31,6 +31,8 @@ services:
     build: ./client
     ports:
       - "80:80"
+    volumes:
+      - ./client/src/:/app/src
     networks:
       is_app:
         ipv4_address: 172.30.0.15
