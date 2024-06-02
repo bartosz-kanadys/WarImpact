@@ -67,7 +67,6 @@ export const ChartPage = () => {
       console.log(roundedConflictPeriods)
 
     const handleClick = (link:string,name:string) => {
-        console.log("ChartPage")
         setLink(link)
         setName(name)
         fetchData();

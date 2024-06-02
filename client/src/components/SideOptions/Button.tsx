@@ -11,6 +11,6 @@ export const Button = ({ name, link, handleClick }: Props) => {
     };
 
     return (
-        <button onClick={handleClickButton}>{name}</button>
+        <button className="w-full" onClick={handleClickButton}>{name}</button>
     );
 };
