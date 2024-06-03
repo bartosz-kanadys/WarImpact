@@ -42,14 +42,14 @@ export const ChartPage = () => {
       }
       const pricesResponse = await fetch('http://localhost:5000' + link, {
         headers: {
-          'Authorization': `Bearer ${token}`,
+          'Authorization': token,
           'Content-Type': 'application/json'
         }
       });
       const pricesData = await pricesResponse.json();
       const conflictsResponse = await fetch('http://localhost:5000/conflicts/getConflicts', {
         headers: {
-          'Authorization': `Bearer ${token}`,
+          'Authorization': token,
           'Content-Type': 'application/json'
         }
       });
