@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Chart} from "../Chart";
 import { SideOptions } from "../SideOptions";
 import { format, parseISO } from "date-fns";
-
+import { useAuthContext } from "../Auth/AuthContext";
 
 // Funkcja do zaokrąglania daty do roku i miesiąca
 const roundDateToMonth = (dateString: string): string => {
@@ -23,11 +23,16 @@ const roundDateToMonth = (dateString: string): string => {
   }
 
 export const ChartPage = () => {
+    const { isLoggedIn } = useAuthContext();
     const [link, setLink] = useState("/res/copper/getAll");
     const [name, setName] = useState("Copper price history");
     const [prices, setPrices] = useState<Price[]>([]);
     const [conflicts, setConflicts] = useState<Conflict[]>([]);
     const [loading, setLoading] = useState(true);
+    const [victims, setVictims] = useState(500000);
+    if(!isLoggedIn){
+      window.location.href = '/';
+    }
     useEffect(() => {
         fetchData();
       }, []);
@@ -76,7 +81,7 @@ export const ChartPage = () => {
         ...conflict,
         begin: roundDateToMonth(conflict.begin),
         end: roundDateToMonth(conflict.end),
-      })).filter(conflict => conflict.victims >= 500000);
+      })).filter(conflict => conflict.victims >= victims);
       console.log(roundedCommodityPrices)
       console.log(roundedConflictPeriods)
 
@@ -85,11 +90,13 @@ export const ChartPage = () => {
         setName(name)
         fetchData();
     };
-
+    const handleInput = (victims:number) => {
+      setVictims(victims)
+    }
     return (
         <section className="bg-white dark:bg-gray-900">
             <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
-                    <SideOptions handleClick={handleClick}/>
+                    <SideOptions handleClick={handleClick} handleInput={handleInput} victims={victims}/>
                     <Chart prices={roundedCommodityPrices} conflicts={roundedConflictPeriods} name={name}/>
             </div>
         </section>
