@@ -1,12 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
-var conflictsController = require('../controllers/conflictsController')
+var conflictsController = require('../controllers/conflictsController');
+const authorizationController = require('../controllers/authorizationController');
 
-router.get('/getConflicts', conflictsController.getConflict)
+router.get('/getConflicts', authorizationController.authenticate, conflictsController.getConflict)
 
-router.get('/getConflictByDate', conflictsController.getConflictByDate)
+router.get('/getConflictByDate', authorizationController.authenticate, conflictsController.getConflictByDate)
 
-router.get('/loadAll', conflictsController.loadAll)
+router.get('/loadAll', authorizationController.authenticate, conflictsController.loadAll)
 
 module.exports = router;
