@@ -33,9 +33,23 @@ export const ChartPage = () => {
       }, []);
       const fetchData = async () => {
         try {
-          const pricesResponse = await fetch('http://localhost:5000'+link);
+          const token = localStorage.getItem('jwtToken');
+          if (!token) {
+              throw new Error('JWT token not found in localStorage');
+          }
+          const pricesResponse = await fetch('http://localhost:5000'+link, {
+            headers: {
+                'Authorization': `${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
           const pricesData = await pricesResponse.json();
-          const conflictsResponse = await fetch('http://localhost:5000/conflicts/getConflicts');
+          const conflictsResponse = await fetch('http://localhost:5000/conflicts/getConflicts', {
+            headers: {
+                'Authorization': `${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
           const conflictsData = await conflictsResponse.json();
           setPrices(pricesData);
           setConflicts(conflictsData);

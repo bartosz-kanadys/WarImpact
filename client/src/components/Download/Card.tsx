@@ -5,8 +5,17 @@ type Props = {
 
 export const Card = ({name, link} : Props) => {
     const handleDownload = async () => {
-        try {
-            const response = await fetch('http://localhost:5000'+link);
+            try {
+            const token = localStorage.getItem('jwtToken');
+            if (!token) {
+                throw new Error('JWT token not found in localStorage');
+            }
+            const response = await fetch('http://localhost:5000' + link, {
+                headers: {
+                    'Authorization': `${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }

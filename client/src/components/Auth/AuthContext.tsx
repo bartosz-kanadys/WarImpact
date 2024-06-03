@@ -45,6 +45,7 @@ const useAuth = () => {
       setuserName("");
       setExpiration(0)
       localStorage.removeItem('jwtToken');
+      window.location.href = '/';
     }
     useEffect(() => {
         const token = localStorage.getItem('jwtToken');
