@@ -30,11 +30,6 @@ export const ChartPage = () => {
   const [conflicts, setConflicts] = useState<Conflict[]>([]);
   const [loading, setLoading] = useState(true);
   const [victims, setVictims] = useState(500000);
-
-  if (!isLoggedIn) {
-    window.location.href = '/';
-  }
-
   useEffect(() => {
     fetchData();
   }, [link, victims]); // Dodaj link i victims jako zależności
@@ -87,7 +82,9 @@ export const ChartPage = () => {
   
   console.log(roundedCommodityPrices)
   console.log(roundedConflictPeriods)
-
+  if (!isLoggedIn) {
+    window.location.href = '/';
+  }
   const handleClick = (link: string, name: string) => {
     setLink(link);
     setName(name);
