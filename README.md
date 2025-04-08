@@ -8,22 +8,38 @@ Dla podwyższenia oceny końcowej, można oddać zrobione laboratoria, lecz nie 
 - Interaktywny wykres przedstawiający zmiany cen wybranego surowca na przestrzeni lat.
 - Zaznaczenie istotnych konfliktów zbrojnych na osi czasu (np. wojna w Syrii, wojna na Ukrainie, wojna domowa w Sudanie).
 
-# **Ocena 3:**
-- Obsługa usługi SOAP lub REST dla pobierania danych.
-- Implementacja mechanizmów walidacji przetwarzanych danych
-- Zapis pozyskanych danych do bazy danych aplikacji oraz odczyt danych z bazy do aplikacji z wykorzystaniem ORM.
-- Implementacja mechanizmu uwierzytelnienia i autoryzacji.
-- Implementacja mechanizmu transakcji w dostępie (odczyt zapis) do bazy danych.
+# Części projektu
 
-# **Ocena 4: wszystko co na ocenę 3 plus**
-- Wykorzystanie warstwy graficznej: interface użytkownika, pobieranie danych, wyświetlanie wyników itd.
-- Eksport danych w formacie XML lub JSON.
+## Klient
+- **Język programowania**: TypeScript
+- **Framework**: React
+- **Cechy**:
+  - Udostępnianie danych o cenach surowców
+  - Przedstawianie zmian cen surowców w postaci wykresów z zaznaczonymi konfliktami zbrojnymi
 
-# **Ocena 5: wszystko co na ocenę 4 plus**
-- Stworzenie kontenera Docker obejmującego stworzoną aplikację lub zespół aplikacji wraz ze wszystkimi koniecznymi do działania składnikami.
-- Funkcje usprawniające dostęp do współdzielonych zasobów (poziomy izolacji w bazach danych).
+## Serwer
+- **Język programowania**: JavaScript
+- **Framework**: Express.js
+- **Baza danych**: SQL
+- **Features**:
+  - Autoryzacja i auntetykacja za pomocą JWT
+  - Pobieranie danych o cenach surowców i o konfliktach z zewnętrznego API i zapisywanie ich do bazy danych
+  - Przekazywanie danych o cenach surowców i o konfliktach do klienta
 
-# **Extra:**
-- Dodatkowe zaawansowane metody wizualizacji oraz interakcji z danymi poprzez interfejs użytkownika, np. w trybie współdzielonym
-- Dodatkowe innowacje lub usprawnienia w obszarze funkcjonalności, które przynoszą dodatkową wartość użytkownikom lub ulepszają wydajność i bezpieczeństwo systemu.
+## Database
+- **Język**: SQL
+- **Cechy**:
+  - Przechowywanie danych o cenach surowców i o konfliktach
+  - Przechowywanie danych użytkowników
 
+## Zrzuty ekranu
+- Strona główna
+[![stronadomowa.jpg](https://i.postimg.cc/hvyPT3Ck/stronadomowa.jpg)](https://postimg.cc/y3RHznCj)
+- Wykres cen 1
+[![dane1.jpg](https://i.postimg.cc/25h6MG6W/dane1.jpg)](https://postimg.cc/065PJp75)
+- Wykres cen 2
+[![dane2.jpg](https://i.postimg.cc/2j25sVz0/dane2.jpg)](https://postimg.cc/F1kmcFkS)
+- Dane cen surowców i konfliktów do pobrania
+[![json.jpg](https://i.postimg.cc/bJRvNv1N/json.jpg)](https://postimg.cc/XGpWs42T)
+- Rejestracja
+[![rejestracja.jpg](https://i.postimg.cc/nrchst1K/rejestracja.jpg)](https://postimg.cc/ZB2Sg220)
