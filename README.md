@@ -1,6 +1,12 @@
-# Projekt integracja systemów
+# WarImpact – Global Commodity Prices & Conflict Correlation
+
+WarImpact to interaktywna aplikacja webowa prezentująca historyczne dane cen surowców w kontekście globalnych konfliktów zbrojnych. Projekt pozwala użytkownikowi na analizę wpływu wojen i konfliktów na ceny podstawowych surowców takich jak aluminium, kawa, miedź, kukurydza, bawełna, gaz, ropa, cukier i pszenica.
 
 Dla podwyższenia oceny końcowej, można oddać zrobione laboratoria, lecz nie są one wymagane.
+
+# **Funkcjonalności:**
+- Interaktywny wykres przedstawiający zmiany cen wybranego surowca na przestrzeni lat.
+- Zaznaczenie istotnych konfliktów zbrojnych na osi czasu (np. wojna w Syrii, wojna na Ukrainie, wojna domowa w Sudanie).
 
 # **Ocena 3:**
 - Obsługa usługi SOAP lub REST dla pobierania danych.
